@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Outflow Detail{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3>Outflow Detail</h3>
+    <div class="card p-4">
+        <div class="card-body">
+            <h3 class="card-title"> {{ outflow.product }}</h3>
+            <p class="card-text">Quantity: {{ outflow.quantity }}</p>
+            <p class="card-text">Date: {{ outflow.created_at }}</p>
+            <p class="card-text">Description: {{ outflow.description }}</p>
+        </div>
+    </div>
+    <div class="mt-3">
+        <a href="{% url 'outflow_list' %}" class="btn btn-secondary">Back to outflow List</a>
+    </div>
+</div>
+{% endblock %}

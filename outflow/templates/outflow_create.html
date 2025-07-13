@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Create Outflow{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h3>Create Outflow</h3>
+    <div class="card p-4">
+        <div class="card-body">
+
+            <!-- Django Messages  -->
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% elif not success %}
+                <div class="alert alert-info" role="alert">
+                    Please fill out the form below to update the Outflow.
+                </div>
+            {% endif %}
+
+            <!-- Form Errors -->
+            {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                <strong>Error!</strong> Please correct the errors below.
+            </div>
+            {% endif %}
+
+            <!-- Form to create a new category -->
+            <form method="post" class="form-horizontal">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Register Outflow</button>
+            </form>
+
+        </div>
+    </div>
+    <div class="mt-3">
+        <a href="{% url 'outflow_list' %}" class="btn btn-secondary">Back to Outflow List</a>
+    </div>
+</div>
+
+<!-- Redirect after success -->
+{% if success %}
+<script>
+    setTimeout(function() {
+        window.location.href = "{% url 'outflow_list' %}";
+    }, 2000);
+</script>
+{% endif %}
+{% endblock %}

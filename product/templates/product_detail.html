@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Product Detail{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3>Product Detail</h3>
+    <div class="card p-4">
+        <div class="card-body">
+            <h3 class="card-title"> {{ product.title }}</h3>
+            <strong><p class="card-text">Category:</strong> {{ product.category }}</p>
+            <strong><p class="card-text">Brand:</strong> {{ product.brand }}</p>
+            <strong><p class="card-text">Description:</strong> {{ product.description }}</p>
+            <strong><p class="card-text">Serie Number:</strong> {{ product.serie_number }}</p>
+            <strong><p class="card-text">Cost Price:</strong> {{ product.cost_price }}</p>
+            <strong><p class="card-text">Selling Price:</strong> {{ product.selling_price }}</p>
+            <strong><p class="card-text">Quantity:</strong> {{ product.quantity }}</p>
+        </div>
+    </div>
+    <div class="mt-3">
+        <a href="{% url 'product_list' %}" class="btn btn-secondary">Back to Product List</a>
+    </div>
+</div>
+{% endblock %}

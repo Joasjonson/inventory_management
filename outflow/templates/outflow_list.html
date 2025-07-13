@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Outflow List{% endblock %}
+
+{% block content %}
+
+{% include "components/_sales_metric.html" %}
+
+
+<div  style="margin-left: 10px; margin-right: 20px;">
+
+    <h1 class="mt-4">Outflow</h1>
+
+    <!-- Search form -->
+    <div class="row mb-3">
+        <div class="col-md-5">
+            <form method="get" action="{% url 'outflow_list' %}">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control" placeholder="Search by name or description"
+                        value="">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-5">
+            <a href="{% url 'outflow_create' %}" class="btn btn-primary float-right">
+                <i class="bi bi-plus"></i> Create New Outflow
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Outflow list table -->
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Product</th>                
+                <th scope="col">Quantity</th>
+                <th scope="col">Description</th>
+                <th scope="col">Date Received</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for outflow in outflows %}
+            <tr>
+                <td>{{ outflow.id }}</td>
+                <td>{{ outflow.product }}</td>
+                <td>{{ outflow.quantity }}</td>
+                <td>{{ outflow.description }}</td>
+                <td>{{ outflow.created_at }}</td>
+                <td>
+                    <a href="{% url 'outflow_detail' outflow.id %}" class="btn btn-sm btn-outline-info">
+                        <i class="bi bi-eye"></i> View
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No outflow found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% include "components/_pagination.html" %}
+
+    <!-- Info alert -->
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">Info!</h4>
+        <p>You can create a new inflow by clicking the "Create New outflow" .</p>
+    </div>
+</div>
+
+
+
+{% endblock %}

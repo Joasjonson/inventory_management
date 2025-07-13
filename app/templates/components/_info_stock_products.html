@@ -1,0 +1,99 @@
+{% block content %}
+
+<!-- Latest Products -->
+<div class="mt-5">
+    <h5 class="mb-3">🆕 Latest Products</h5>
+
+    {% if product_metrics.latest_products %}
+    <div class="table-responsive">
+        <table class="table table-dark table-bordered table-hover">
+        <thead class="table-primary">
+            <tr>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Brand</th>
+            <th>Creation Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in product_metrics.latest_products %}
+            <tr>
+            <td>{{ product.title }}</td>
+            <td>{{ product.category.name }}</td>
+            <td>{{ product.brand.name }}</td>
+            <td>{{ product.created_at|date:"d/m/Y" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-success">No products registered 🎉</p>
+    {% endif %}
+
+
+
+<!-- Most Sold Products -->
+<div class="mt-5">
+    <h5 class="mb-3">🔥 Most Sold Products</h5>
+
+    {% if product_metrics.top_selling %}
+    <div class="table-responsive">
+        <table class="table table-dark table-bordered table-hover">
+        <thead class="table-success">
+            <tr>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Brand</th>
+            <th>Sales</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in product_metrics.top_selling %}
+            <tr>
+            <td>{{ product.title }}</td>
+            <td>{{ product.category.name }}</td>
+            <td>{{ product.brand.name }}</td>
+            <td>{{ product.sales_count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-success">No products sold yet 🎉</p>
+    {% endif %}
+
+<!-- Low Stock Products -->
+<div class="mt-5">
+  <h5 class="mb-3">🔴 Low Stock Products (less than 5)</h5>
+
+  {% if product_metrics.low_stock %}
+  <div class="table-responsive">
+    <table class="table table-dark table-bordered table-hover">
+      <thead class="table-danger">
+        <tr>
+          <th>Product</th>
+          <th>Category</th>
+          <th>Brand</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in product_metrics.low_stock %}
+        <tr class="{% if product.quantity == 0 %}table-danger{% else %}table-warning{% endif %}">
+          <td>{{ product.title }}</td>
+          <td>{{ product.category.name }}</td>
+          <td>{{ product.brand.name }}</td>
+          <td>{{ product.quantity }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="text-success">Nenhum produto com estoque abaixo de 5 🎉</p>
+  {% endif %}
+</div>
+
+{% endblock %}

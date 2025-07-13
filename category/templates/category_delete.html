@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Update Category{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h3>Delete Category</h3>
+    <div class="card p-4">
+        <div class="card-body">
+            <p>Are you sure you want to delete the category "{{ category.name }}"?</p>
+            <form method="post" class="form-horizontal">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Delete Category</button>
+                <a href="{% url 'category_list' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
